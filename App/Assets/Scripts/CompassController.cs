@@ -15,6 +15,6 @@ public class CompassController : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 		headview = Cardboard.SDK.HeadPose;
-		GetComponent<Text>().text = "Heading: " + headview.Orientation.eulerAngles;
+        GetComponent<Text>().text = "Heading: " + headview.Orientation.eulerAngles + "\nRotation: " + Camera.main.transform.rotation.eulerAngles;
 	}
 }
