@@ -16,6 +16,5 @@ public class CompassController : MonoBehaviour
 	void Update () {
 		headview = Cardboard.SDK.HeadPose;
 		GetComponent<Text>().text = "Heading: " + headview.Orientation.eulerAngles;
-
 	}
 }

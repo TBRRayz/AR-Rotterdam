@@ -10,20 +10,12 @@ public class CameraController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-
-		WebCamDevice[] devices = WebCamTexture.devices;
-		//WebCamTexture webcamTexture = new WebCamTexture();
-
-			Debug.Log ("Script has been started");
-			plane = GameObject.FindWithTag ("Player");
+		Debug.Log ("Script has been started");
 
 		WebCamTexture webcamTexture = new WebCamTexture();
-		Renderer renderer = GetComponent<Renderer>();
-		renderer.material.mainTexture = webcamTexture;
+        GetComponent<Renderer>().material.mainTexture = webcamTexture;
 		webcamTexture.Play();
-
-
-		}
+	}
 
 
 	// Update is called once per frame
