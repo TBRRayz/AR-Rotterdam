@@ -16,7 +16,7 @@ public class POIManager : MonoBehaviour
         foreach (var p in POI)
         {
             p.GetComponent<Renderer>().enabled = false;
-            p.GetComponent<PointOfInterest>().image.enabled = false;
+            p.GetComponent<PointOfInterest>().toggleImage(false);
         }
 
         gazeSelector.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z + 1);
@@ -59,14 +59,13 @@ public class POIManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 500, POILayer))
         {
             Debug.Log("Selected");
-            Image obj = GameObject.Find(hit.transform.name).GetComponent<PointOfInterest>().image;
-            obj.enabled = true;
+            GameObject.Find(hit.transform.name).GetComponent<PointOfInterest>().toggleImage(true);
         }
         else
         {
             foreach (var p in POI)
             {
-                p.GetComponent<PointOfInterest>().image.enabled = false;
+                p.GetComponent<PointOfInterest>().toggleImage(false);
             }
         }
     }
