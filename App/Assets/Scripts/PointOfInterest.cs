@@ -6,25 +6,42 @@ public class PointOfInterest : MonoBehaviour
 {
     public string POIName;
 
-    private Image image;
+    private GameObject ui;
+    private Image _image;
+    private Text _title;
+    private Text _rating;
+    private Text _description;
     private string url;
     private bool init;
     private Sprite sprite;
+
+    private string title;
+    private float rating;
+    private string description;
 
     public void toggleImage(bool flag)
     {
         if(flag == true)
         {
-            image.sprite = sprite;
+            _image.sprite = sprite;
+            _title.text = title;
+            _rating.text = "Rating: " + rating + " stars";
+            _description.text = description;
         }
 
-        image.enabled = flag;
+        ui.SetActive(flag);
     }
 
     public void Start()
     {
-        image = GameObject.Find("Image").GetComponent<Image>();
-        url = "https://jschooten.com/projects/cle3/?place=" + POIName;
+        ui = GameObject.Find("PoIUI");
+        _image = ui.transform.Find("Image").GetComponent<Image>();
+        _title = ui.transform.Find("Title").GetComponent<Text>();
+        _rating = ui.transform.Find("Rating").GetComponent<Text>();
+        _description = ui.transform.Find("Description").GetComponent<Text>();
+        
+        //url = "https://jschooten.com/projects/cle3/?place=" + POIName; //-- Live
+        url = "http://localhost:63342/school/AR-Rotterdam/backend/?place=" + POIName; //-- Debug
 
         StartCoroutine(LoadAPIData());
     }
@@ -36,6 +53,10 @@ public class PointOfInterest : MonoBehaviour
 
         Debug.Log(www.text);
         APIObject result = APIObject.FromJSON(www.text);
+
+        this.title = result.name;
+        this.rating = result.rating;
+        this.description = result.wikipedia;
 
         WWW img = new WWW(result.image);
         yield return img;
