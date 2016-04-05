@@ -24,7 +24,7 @@ public class PointOfInterest : MonoBehaviour
     public void Start()
     {
         image = GameObject.Find("Image").GetComponent<Image>();
-        url = "http://localhost:63342/school/CLE3/backend/?place=" + POIName;
+        url = "https://jschooten.com/projects/cle3/?place=" + POIName;
 
         StartCoroutine(LoadAPIData());
     }
